@@ -1,9 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures/index';
 
-test('should displays products on the home page', async ({ page }) => {
+test('should displays products on the home page', async ({ page, homePage }) => {
 
-    const productName = page.locator('[data-test="product-name"]').first();
 
     await page.goto('/');
-    await expect(productName).toBeVisible();
+    await expect(homePage.productName).toBeVisible();
 });

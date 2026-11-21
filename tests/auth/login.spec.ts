@@ -1,12 +1,9 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/HomePage';
-import { LoginPage } from '../../pages/LoginPage';
+import { test, expect } from '../../fixtures/index';
+
 import customers from '../../data/customer.json';
 
-test('should login successfully with valid credentials', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const loginPage = new LoginPage(page);
-
+test('should login successfully with valid credentials', async ({ page, homePage, loginPage }) => {
+  
     await page.goto('/');
     await homePage.signInButton.click();
     await expect(loginPage.loginForm).toBeVisible();
