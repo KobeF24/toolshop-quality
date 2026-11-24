@@ -32,7 +32,6 @@ export default defineConfig({
     trace: 'on-first-retry',
 
     locale: 'en-US',
-
   },
 
   /* Configure projects for major browsers */

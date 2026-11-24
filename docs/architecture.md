@@ -21,6 +21,7 @@ Every test imports from the same place: `'../../fixtures'`.
 ## Layers
 
 ### `ui.fixtures.ts` — page objects (test scope)
+
 Each fixture receives `page` and provides a page object:
 
 ```ts
@@ -30,6 +31,7 @@ homePage: async ({ page }, use) => {
 ```
 
 ### `api.fixtures.ts` — account per worker (worker scope)
+
 - Runs **once per worker process**, not once per test (`{ scope: 'worker' }`).
 - Builds a unique email from `workerInfo.parallelIndex` + `Date.now()`
   (unique between workers and between runs).
@@ -38,14 +40,17 @@ homePage: async ({ page }, use) => {
 - `expect(res.status(), await res.text())`: the second argument is the failure message, so the API error body shows up in the report.
 
 ### `session.fixtures.ts` — logged-in browser
+
 - `mergeTests(uiTest, apiTest)` combines both layers, then adds `customer`.
 - `customer` injects the worker's token into `localStorage['auth-token']` with `page.addInitScript`,
   before any page script runs: the app starts already logged in, no UI login needed.
 
 ### `index.ts` — entry point
+
 Only re-exports `test` and `expect`. Adding a layer changes this file, not the tests.
 
 ## Key principles
+
 1. A fixture = setup → `use(value)` → teardown.
 2. A fixture declares what it needs in its parameters; Playwright resolves the dependencies.
 3. Test-scoped fixtures are recreated for every test; worker-scoped fixtures once per process.
@@ -53,6 +58,7 @@ Only re-exports `test` and `expect`. Adding a layer changes this file, not the t
 5. Requesting a fixture for its side effect is valid (e.g. `customer` logs the browser in).
 
 ## Why one account per worker
+
 Tests run in parallel in several workers. With a shared account they interfere
 (cart, orders, profile, session). Each worker creates its own account through the API,
 so tests are isolated without slowing down: one account per worker, not per test.

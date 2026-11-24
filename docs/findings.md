@@ -3,6 +3,7 @@
 Defects found while automating the Toolshop (sprint5) test suite.
 
 ## F-01 — Order rejected silently after "Payment was successful"
+
 - **Severity:** Major
 - **Steps:**
   1. Log in as a customer, add a product to the cart, go through checkout.
@@ -14,6 +15,7 @@ Defects found while automating the Toolshop (sprint5) test suite.
   `{"billing_country": ["The billing_country does not match the entered address. The city does not belong to the selected country."]}`
 
 ## F-02 — Postcode auto-fill clears the state for France, blocking checkout
+
 - **Severity:** Major
 - **Steps:**
   1. On the billing address step, select France.
@@ -24,6 +26,7 @@ Defects found while automating the Toolshop (sprint5) test suite.
 - **Evidence:** Request payload `billing_state: ""` after typing a state.
 
 ## F-03 — Required search parameter `q` is not enforced
+
 - **Severity:** Minor
 - **Steps:** `GET /products/search` without the `q` parameter.
 - **Expected:** 422 with a validation error (Swagger marks `q` as required).
@@ -31,6 +34,7 @@ Defects found while automating the Toolshop (sprint5) test suite.
 - **Risk:** Clients sending a wrong parameter name get "no results" instead of an error, which hides integration bugs.
 
 ## F-04 — API documentation does not match actual response types
+
 - **Severity:** Minor
 - **Steps:** Compare the Swagger example for `GET /products/search` with a real response.
 - **Expected:** Same types in the documentation and the response.

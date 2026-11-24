@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 30
     env:
       SPRINT: sprint5
-      DISABLE_LOGGING: "true"
+      DISABLE_LOGGING: 'true'
       BASE_URL: http://localhost:4200
       API_URL: http://localhost:8091
       CUSTOMER_EMAIL: ${{ secrets.CUSTOMER_EMAIL }}
@@ -71,6 +71,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Lint
+        run: npm run lint
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps

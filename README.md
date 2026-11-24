@@ -14,13 +14,13 @@ This repository shows how I approach quality on a web shop: what to test first, 
 
 ### Risk-based priorities
 
-| Priority | Area | Why | Coverage |
-|---|---|---|---|
-| P1 | Checkout (cart → address → payment → order) | Revenue-critical, crosses most integrations (cart, auth, address lookup, invoices) | End-to-end UI test |
-| P1 | Authentication | Gate to the checkout | UI login test, API account per worker |
-| P2 | Add to cart | Entry to the funnel, price and name consistency between API and UI | Hybrid test (API data, UI behaviour) |
-| P2 | Product search | Main navigation path | API test |
-| P3 | Home page catalogue | Smoke check: the shop is up and serves products | UI smoke test |
+| Priority | Area                                        | Why                                                                                | Coverage                              |
+| -------- | ------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------- |
+| P1       | Checkout (cart → address → payment → order) | Revenue-critical, crosses most integrations (cart, auth, address lookup, invoices) | End-to-end UI test                    |
+| P1       | Authentication                              | Gate to the checkout                                                               | UI login test, API account per worker |
+| P2       | Add to cart                                 | Entry to the funnel, price and name consistency between API and UI                 | Hybrid test (API data, UI behaviour)  |
+| P2       | Product search                              | Main navigation path                                                               | API test                              |
+| P3       | Home page catalogue                         | Smoke check: the shop is up and serves products                                    | UI smoke test                         |
 
 ### Test levels
 
