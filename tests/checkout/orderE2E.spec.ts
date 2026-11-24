@@ -2,14 +2,10 @@ import { test, expect } from '../../fixtures/index';
 
 import customers from '../../data/customer.json';
 
-test('Checkout order E2E', async ({ page, homePage, loginPage, request, cartPage, productPage, headerPage, checkoutPage }) => {
+test('Checkout order E2E', async ({ page, homePage, loginPage, request, cartPage, productPage, headerPage, checkoutPage,customer }) => {
 
     await page.goto('/');
-    await homePage.signInButton.click();
-    await expect(loginPage.loginForm).toBeVisible();
-    await loginPage.login(customers.valid.email, customers.valid.password);
-
-    await expect(page).toHaveURL(/\/account/);
+   
 
     const API_URL = 'http://localhost:8091';
     const response = await request.get(`${API_URL}/products/search`, {
