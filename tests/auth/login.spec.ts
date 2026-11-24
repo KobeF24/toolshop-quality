@@ -1,13 +1,11 @@
 import { test, expect } from '../../fixtures/index';
-
-import customers from '../../data/customer.json';
+import { env } from '../../config/env';
 
 test('should login successfully with valid credentials', async ({ page, homePage, loginPage }) => {
-  
+
     await page.goto('/');
     await homePage.signInButton.click();
     await expect(loginPage.loginForm).toBeVisible();
-    await loginPage.login(customers.valid.email, customers.valid.password);
-
+    await loginPage.login(env.customer.email, env.customer.password);
     await expect(page).toHaveURL(/\/account/);
 });
