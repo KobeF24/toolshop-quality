@@ -36,6 +36,9 @@ jobs:
         run: |
           sleep 30
           docker compose exec -T -u root laravel-api composer install --no-dev --optimize-autoloader --ignore-platform-req=ext-ffi
+      - name: Fix storage permissions
+        working-directory: toolshop
+        run: docker compose exec -T -u root laravel-api chmod -R 777 storage bootstrap/cache
 
       - name: Wait for database
         working-directory: toolshop
