@@ -1,6 +1,6 @@
 import { test, expect } from '../../fixtures';
+import { API_URL } from '../../fixtures/api.fixtures';
 
-const API_URL = 'http://localhost:8091';
 
 test('adding a product to the cart updates the cart', async ({ page, request, cartPage, productPage, headerPage }) => {
     // Arrange : récupérer un produit par API

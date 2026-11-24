@@ -1,4 +1,5 @@
 import { test, expect } from '../../fixtures/index';
+import { API_URL } from '../../fixtures/api.fixtures';
 
 import customers from '../../data/customer.json';
 
@@ -7,7 +8,6 @@ test('Checkout order E2E', async ({ page, homePage, loginPage, request, cartPage
     await page.goto('/');
    
 
-    const API_URL = 'http://localhost:8091';
     const response = await request.get(`${API_URL}/products/search`, {
         params: { q: 'hammer' },
     });
