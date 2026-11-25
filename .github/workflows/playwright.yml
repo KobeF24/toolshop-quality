@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'     # chaque nuit à 2 h (UTC)
 
 jobs:
   test:
@@ -79,7 +81,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: npx playwright test
+        run: npx playwright test ${{ github.event_name == 'pull_request' && '--grep @smoke --project=chromium' || '' }}
 
       - name: Upload report
         if: always()

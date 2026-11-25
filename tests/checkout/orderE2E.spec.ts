@@ -1,7 +1,7 @@
 import { test, expect } from '../../fixtures/index';
 import { API_URL } from '../../fixtures/api.fixtures';
 
-test('Checkout order E2E', async ({ page, request, cartPage, productPage, headerPage, checkoutPage, customer }) => {
+test('Checkout order E2E', { tag: '@smoke' }, async ({ page, request, cartPage, productPage, headerPage, checkoutPage, customer }) => {
   await page.goto('/');
 
   const response = await request.get(`${API_URL}/products/search`, {
