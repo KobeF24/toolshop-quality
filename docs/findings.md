@@ -40,3 +40,22 @@ Defects found while automating the Toolshop (sprint5) test suite.
 - **Expected:** Same types in the documentation and the response.
 - **Actual:** Swagger shows `is_location_offer: 1`, `in_stock: 0` (integers); the API returns `true` / `false` (booleans).
 - **Risk:** Consumers built against the documentation may parse the fields incorrectly.
+
+## Suite validation against the buggy build (`sprint5-with-bugs`)
+
+Goal: check that the suite fails when the application is broken, and find coverage gaps.
+
+| Test | Result | Verdict |
+|---|---|---|
+| Product search (API) | Search "hammer" returns "Leather toolbelt" | Defect detected |
+| Home page (UI) | Product cards rendered with empty names | Defect detected |
+| Login (UI) | Valid demo credentials rejected ("Invalid email or password") | Defect detected |
+| Worker account fixture | Registration contract changed (address, city, country required; last name format) | Blocked: checkout E2E never ran |
+| Add to cart (hybrid) | Hash routing (`/#/...`): direct product URL does not open the product page | Test assumption, not a defect |
+
+**Not detected by the suite:** typos in labels ("Sorth", "Serch"), broken search icon. No visual or label checks exist.
+
+**Lessons:**
+- 3 customer-facing defects caught by 6 tests.
+- The critical checkout path depends on the account fixture: when registration changes, checkout is no longer verified. Next step: make the fixture fail with a clear "blocked" status, or add a fallback account.
+- Label and visual defects need `toHaveScreenshot` on key screens.
