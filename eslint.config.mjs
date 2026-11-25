@@ -5,8 +5,7 @@ import playwright from 'eslint-plugin-playwright';
 import prettier from 'eslint-config-prettier';
 
 export default defineConfig([
-  { ignores: ['node_modules', 'playwright-report', 'test-results'] },
-  js.configs.recommended,
+  { ignores: ['node_modules', 'playwright-report', 'test-results', 'toolshop'] },  js.configs.recommended,
   tseslint.configs.recommended,
   {
     languageOptions: {
