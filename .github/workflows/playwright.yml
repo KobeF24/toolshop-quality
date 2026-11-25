@@ -1,3 +1,26 @@
+name: Playwright tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'     # chaque nuit à 2 h (UTC)
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SPRINT: sprint5
+      DISABLE_LOGGING: 'true'
+      BASE_URL: http://localhost:4200
+      API_URL: http://localhost:8091
+      CUSTOMER_EMAIL: ${{ secrets.CUSTOMER_EMAIL }}
+      CUSTOMER_PASSWORD: ${{ secrets.CUSTOMER_PASSWORD }}
+
     steps:
       - name: Checkout tests
         uses: actions/checkout@v5
