@@ -5,7 +5,8 @@ import playwright from 'eslint-plugin-playwright';
 import prettier from 'eslint-config-prettier';
 
 export default defineConfig([
-  { ignores: ['node_modules', 'playwright-report', 'test-results', 'toolshop'] },  js.configs.recommended,
+  { ignores: ['node_modules', 'playwright-report', 'test-results', 'reports', 'toolshop'] },
+  js.configs.recommended,
   tseslint.configs.recommended,
   {
     languageOptions: {
@@ -17,6 +18,8 @@ export default defineConfig([
     },
   },
   { files: ['tests/**/*.ts'], ...playwright.configs['flat/recommended'] },
-  { files: ['eslint.config.mjs'], ...tseslint.configs.disableTypeChecked },
+  { files: ['**/*.mjs'], ...tseslint.configs.disableTypeChecked },
+  // Node scripts: declare Node globals
+  { files: ['**/*.mjs'], languageOptions: { globals: { process: 'readonly', console: 'readonly' } } },
   prettier,
 ]);
