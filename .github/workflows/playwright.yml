@@ -83,6 +83,10 @@ jobs:
       - name: Run tests
         run: npx playwright test ${{ github.event_name == 'pull_request' && '--grep @smoke --project=chromium' || '' }}
 
+      - name: Release decision summary
+        if: ${{ !cancelled() }}
+        run: node scripts/report-summary.mjs
+
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4

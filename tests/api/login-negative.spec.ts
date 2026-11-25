@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { randomUUID } from 'node:crypto';
 import { API_URL } from '../../fixtures/api.fixtures';
 
 test.use({ baseURL: API_URL });
@@ -7,7 +8,7 @@ const password = 'Str0ng!Pass#2026';
 let email: string;
 
 test.beforeAll(async ({ request }) => {
-  email = `neg-${Date.now()}@test.local`;
+  email = `neg-${randomUUID()}@test.local`;
   const res = await request.post(`${API_URL}/users/register`, {
     data: { first_name: 'Neg', last_name: 'Login', email, password },
   });
@@ -16,7 +17,7 @@ test.beforeAll(async ({ request }) => {
 
 const cases = [
   { name: 'wrong password', email: () => email, password: 'Wrong!Pass#2026', error: 'Unauthorized' },
-  { name: 'unknown email', email: () => `unknown-${Date.now()}@test.local`, password, error: 'Unauthorized' },
+  { name: 'unknown email', email: () => `unknown-${randomUUID()}@test.local`, password, error: 'Unauthorized' },
   { name: 'empty fields', email: () => '', password: '', error: 'Invalid login request' },
 ];
 
